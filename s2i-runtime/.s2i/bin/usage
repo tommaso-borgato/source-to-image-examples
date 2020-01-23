@@ -1,0 +1,15 @@
+#!/bin/bash -e
+cat <<EOF
+This is the s2i-tborgato-app S2I image:
+To use it, install S2I: https://github.com/openshift/source-to-image
+
+Sample invocation:
+
+docker build -t s2i-tborgato-maven -f ./build-image/Dockerfile .
+docker build -t s2i-tborgato-runtime -f ./runtime-image/Dockerfile .
+s2i build ./test/test-app s2i-tborgato-maven s2i-tborgato-app --runtime-image s2i-tborgato-runtime --runtime-artifact /tmp/app.jar
+
+You can then run the resulting image via:
+
+docker run --rm --network=host s2i-tborgato-app
+EOF
